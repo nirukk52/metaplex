@@ -21,22 +21,8 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.ql.giantbomb.game.ui.search.SearchFragment"
+        android:name="com.ql.giantbomb.search.ui.SearchFragment"
         android:label="@string/app_name">
-        <action
-            android:id="@+id/action_searchFragment_to_detailsFragment"
-            app:destination="@id/gameDetailsFragment" />
     </fragment>
-
-
-    <fragment
-        android:id="@+id/gameDetailsFragment"
-        android:name="com.ql.giantbomb.game.ui.detail.GameDetailsFragment"
-        android:label="Game Details">
-        <argument
-            android:name="game"
-            app:argType="com.ql.giantbomb.base.models.Game" />
-    </fragment>
-
 
 </navigation>

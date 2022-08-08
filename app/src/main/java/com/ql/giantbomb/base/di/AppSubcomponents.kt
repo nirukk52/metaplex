@@ -16,13 +16,13 @@
 
 package com.ql.giantbomb.base.di
 
-import com.ql.giantbomb.game.di.GamesComponent
+import com.ql.giantbomb.search.di.SearchComponent
 import dagger.Module
 
 // This module tells a Component which are its subcomponents
 @Module(
     subcomponents = [
-        GamesComponent::class
+        SearchComponent::class
     ]
 )
 class AppSubcomponents

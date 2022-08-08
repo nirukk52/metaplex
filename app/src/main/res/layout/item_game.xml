@@ -9,44 +9,67 @@
             name="game"
             type="com.metaplex.lib.modules.nfts.models.NFT" />
 
+        <variable
+            name="viewmodel"
+            type="com.ql.giantbomb.search.SearchViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/parentItemGame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medium_margin"
+        app:cardBackgroundColor="@color/colorLightBlack"
+        app:cardCornerRadius="@dimen/medium_margin"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        app:strokeColor="@color/colorGrey"
+        app:strokeWidth="1px">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:padding="4dp"
+            android:background="@color/colorLightBlack"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/gameIcon"
-                android:layout_width="?android:attr/listPreferredItemHeight"
-                android:layout_height="?android:attr/listPreferredItemHeight"
-                android:layout_margin="@dimen/small_margin"
-                app:image="@{game}"
-                app:layout_constraintEnd_toStartOf="@id/title"
+                android:layout_width="match_parent"
+                android:layout_height="184dp"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:metaplex="@{viewmodel.searchRepository.metaplex}"
+                app:nft="@{game}"
                 tools:src="@mipmap/ic_launcher" />
 
             <TextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
+                android:id="@+id/name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:padding="@dimen/small_margin"
                 android:text="@{game.name}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintStart_toEndOf="@id/gameIcon"
-                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gameIcon"
+                tools:text="Call of Duty: Black Ops Cold War" />
+
+            <TextView
+                android:id="@+id/key"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:paddingStart="@dimen/small_margin"
+                android:paddingEnd="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:text="@{game.metadataAccount.mint.toBase58()}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorGrey"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name"
                 tools:text="Call of Duty: Black Ops Cold War" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -55,5 +78,5 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             app:layout_constraintTop_toBottomOf="@id/content" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

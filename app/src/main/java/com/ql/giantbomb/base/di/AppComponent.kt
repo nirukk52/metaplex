@@ -18,7 +18,7 @@ package com.ql.giantbomb.base.di
 
 import android.content.Context
 import com.ql.giantbomb.base.di.module.ApiModule
-import com.ql.giantbomb.game.di.GamesComponent
+import com.ql.giantbomb.search.di.SearchComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -37,5 +37,5 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
-    fun gamesComponent(): GamesComponent.Factory
+    fun searchComponent(): SearchComponent.Factory
 }

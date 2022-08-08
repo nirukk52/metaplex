@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Giant Bomb</string>
-    <string name="search_games_here">Search games here!</string>
-    <string name="games_activity">Games Activity</string>
-    <string name="empty_game_list_message">Sorry! No Games to Show. Try Searching Something</string>
-    <string name="no_description">No Game Description</string>
+    <string name="app_name">METAPLEX</string>
+    <string name="put_mint_key">Put mint key here.</string>
+    <string name="search_main_activity">Search Activity</string>
+    <string name="empty_nft_list_message">Sorry! No NFTs to show. Try a Different Key</string>
+    <string name="default_key">4oX431PqGrFBk2qrKQeUMZzabuwsP9AUWfpFbK3vxsLU</string>
 </resources>

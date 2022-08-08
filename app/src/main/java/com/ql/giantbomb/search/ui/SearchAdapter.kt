@@ -1,4 +1,4 @@
-package com.ql.giantbomb.game.ui.search
+package com.ql.giantbomb.search.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,14 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.metaplex.lib.modules.nfts.models.NFT
-import com.ql.giantbomb.base.models.Game
 import com.ql.giantbomb.databinding.ItemGameBinding
-import com.ql.giantbomb.game.GamesViewModel
+import com.ql.giantbomb.search.SearchViewModel
 
 /**
- * Adapter for the task list. Has a reference to the [GamesViewModel] to send actions back to it.
+ * Adapter for the task list. Has a reference to the [SearchViewModel] to send actions back to it.
  */
-class GamesAdapter(private val viewModel: GamesViewModel) :
+class GamesAdapter(private val viewModel: SearchViewModel) :
     ListAdapter<NFT, GamesAdapter.GameViewHolder>(GameDiffCallback()) {
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
@@ -29,9 +28,9 @@ class GamesAdapter(private val viewModel: GamesViewModel) :
     class GameViewHolder private constructor(val binding: ItemGameBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(viewModel: GamesViewModel, item: NFT) {
+        fun bind(viewModel: SearchViewModel, item: NFT) {
 
-//            binding.viewmodel = viewModel
+            binding.viewmodel = viewModel
             binding.game = item
             binding.executePendingBindings()
         }
@@ -56,10 +55,10 @@ class GamesAdapter(private val viewModel: GamesViewModel) :
  */
 class GameDiffCallback : DiffUtil.ItemCallback<NFT>() {
     override fun areItemsTheSame(oldItem: NFT, newItem: NFT): Boolean {
-        return false
+        return oldItem.mint == newItem.mint
     }
 
     override fun areContentsTheSame(oldItem: NFT, newItem: NFT): Boolean {
-        return false
+        return oldItem.mint == newItem.mint
     }
 }

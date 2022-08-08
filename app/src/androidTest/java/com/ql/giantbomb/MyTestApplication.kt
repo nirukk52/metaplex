@@ -17,7 +17,7 @@
 package com.ql.giantbomb
 
 import com.ql.giantbomb.base.di.AppComponent
-import com.ql.giantbomb.base.di.DaggerTestAppComponent
+import com.ql.giantbomb.base.di.DaggerAppComponent
 
 /**
  * MyTestApplication will override MyApplication in android tests
@@ -26,6 +26,6 @@ class MyTestApplication : MyApplication() {
 
     override fun initializeComponent(): AppComponent {
         // Creates a new TestAppComponent that injects fakes types
-        return DaggerTestAppComponent.create()
+        return DaggerAppComponent.factory().create(this)
     }
 }

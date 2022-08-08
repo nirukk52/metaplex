@@ -1,6 +1,6 @@
 package com.ql.giantbomb.base.di.module
 
-import com.ql.giantbomb.base.api.GamesService
+import com.ql.giantbomb.base.api.NFTService
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -41,7 +41,7 @@ object ApiModule {
         callFactory: Call.Factory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://www.giantbomb.com/")
+            .baseUrl("")
             .callFactory(callFactory)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
@@ -50,7 +50,7 @@ object ApiModule {
     @Provides
     @JvmStatic
     @Singleton
-    fun provideGameService(retrofit: Retrofit): GamesService {
+    fun provideGameService(retrofit: Retrofit): NFTService {
         return retrofit.create()
     }
 }

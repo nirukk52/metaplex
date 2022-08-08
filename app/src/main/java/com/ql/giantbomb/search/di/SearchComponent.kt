@@ -1,8 +1,8 @@
-package com.ql.giantbomb.game.di
+package com.ql.giantbomb.search.di
 
 import com.ql.giantbomb.base.di.ActivityScope
-import com.ql.giantbomb.game.GamesActivity
-import com.ql.giantbomb.game.ui.search.SearchFragment
+import com.ql.giantbomb.search.SearchMainActivity
+import com.ql.giantbomb.search.ui.SearchFragment
 import dagger.Subcomponent
 
 
@@ -11,15 +11,15 @@ import dagger.Subcomponent
 @ActivityScope
 // Definition of a Dagger subcomponent
 @Subcomponent
-interface GamesComponent {
+interface SearchComponent {
 
     // Factory to create instances of UserComponent
     @Subcomponent.Factory
     interface Factory {
-        fun create(): GamesComponent
+        fun create(): SearchComponent
     }
 
     // Classes that can be injected by this Component
-    fun inject(gamesActivity: GamesActivity)
+    fun inject(searchMainActivity: SearchMainActivity)
     fun inject(searchFragment: SearchFragment)
 }

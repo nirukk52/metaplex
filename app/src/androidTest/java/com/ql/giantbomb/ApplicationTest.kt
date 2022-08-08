@@ -21,27 +21,33 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.ViewAssertion
-import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.swipeUp
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.filters.LargeTest
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.ql.giantbomb.base.utils.EspressoIdlingResource
-import com.ql.giantbomb.game.GamesActivity
-import com.ql.giantbomb.game.ui.search.GamesAdapter
+import com.ql.giantbomb.search.SearchMainActivity
 import com.ql.giantbomb.util.DataBindingIdlingResource
 import com.ql.giantbomb.util.monitorActivity
 import org.hamcrest.core.Is.`is`
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 
 
+@RunWith(AndroidJUnit4ClassRunner::class)
+@LargeTest
 class ApplicationTest {
 
     // An Idling Resource that waits for Data Binding to have no pending bindings
     private val dataBindingIdlingResource = DataBindingIdlingResource()
+    private var mIdlingResource: IdlingResource? = null
 
     /**
      * Idling resources tell Espresso that the app is idle or busy. This is needed when operations
@@ -52,6 +58,7 @@ class ApplicationTest {
         IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
         IdlingRegistry.getInstance().register(dataBindingIdlingResource)
     }
+
 
     /**
      * Unregister your Idling Resource so it can be garbage collected and does not leak any memory.
@@ -66,33 +73,23 @@ class ApplicationTest {
     @Test
     fun runApp() {
         // start up Game screen
-        val activityScenario = ActivityScenario.launch(GamesActivity::class.java)
+        val activityScenario = ActivityScenario.launch(SearchMainActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
 
         onView(withId(R.id.etSearchGames))
             .check(matches(isDisplayed()))
 
         onView(withId(R.id.etSearchGames))
-            .check(matches(withHint(R.string.search_games_here)))
+            .check(matches(withHint(R.string.default_key)))
 
-        onView(withId(R.id.etSearchGames))
-            .perform(typeText("Call Of Duty"), closeSoftKeyboard())
+        onView(withId(R.id.btGo)).perform(click())
 
         onView(withId(R.id.rvGamesList))
             .perform(swipeUp())
 
-        onView(withId(R.id.rvGamesList)).check(RecyclerViewItemCountAssertion(37))
+        Thread.sleep(3000)
+        onView(withId(R.id.rvGamesList)).check(RecyclerViewItemCountAssertion(772))
 
-        onView(withId(R.id.rvGamesList))
-            .perform(RecyclerViewActions.scrollToPosition<GamesAdapter.GameViewHolder>(15))
-
-        onView(withId(R.id.rvGamesList))
-            .perform(
-                RecyclerViewActions.actionOnItemAtPosition<GamesAdapter.GameViewHolder>(
-                    15,
-                    click()
-                )
-            )
 
     }
 

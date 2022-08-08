@@ -15,11 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.ql.giantbomb.game.GamesActivity"
-            android:label="@string/games_activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-          android:exported="true">
+            android:name="com.ql.giantbomb.search.SearchMainActivity"
+            android:label="@string/search_main_activity"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

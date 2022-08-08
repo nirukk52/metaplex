@@ -15,15 +15,15 @@
  */
 package com.ql.giantbomb.util
 
-
-import com.ql.giantbomb.game.GameRepository
-import kotlinx.coroutines.runBlocking
-
-/**
- * A blocking version of GameRepository.getGames to minimize the number of times we have to
- * explicitly add <code>runBlocking { ... }</code> in our tests
- */
-fun GameRepository.getGamesBlocking(searchFilter: String) = runBlocking {
-    this@getGamesBlocking.getGames(searchFilter)
-}
-
+//
+//import com.ql.giantbomb.game.GameRepository
+//import kotlinx.coroutines.runBlocking
+//
+///**
+// * A blocking version of GameRepository.getGames to minimize the number of times we have to
+// * explicitly add <code>runBlocking { ... }</code> in our tests
+// */
+//fun SearchRepository.getNFTs(searchFilter: String) = runBlocking {
+//
+//}
+//

@@ -11,7 +11,7 @@
 
         <variable
             name="viewmodel"
-            type="com.ql.giantbomb.game.GamesViewModel" />
+            type="com.ql.giantbomb.search.SearchViewModel" />
 
     </data>
 
@@ -19,55 +19,81 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorBlack">
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/small_margin"
-            android:shadowColor="@color/colorAccent"
-            android:shadowDx="2"
-            android:shadowDy="4"
-            android:shadowRadius="1.0"
-            android:text="@string/app_name"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="48sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/vDivider"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:background="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tvTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
-
-        <EditText
-            android:id="@+id/etSearchGames"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/small_margin"
-            android:gravity="center_vertical"
-            android:hint="@string/search_games_here"
-            android:imeOptions="actionSearch"
-            app:layout_constraintBottom_toTopOf="@id/rvGamesList"
+            android:layout_height="120dp"
+            android:background="@color/colorLightBlackTrans"
+            android:elevation="@dimen/small_margin"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/medium_margin"
+                android:fontFamily="sans-serif-smallcaps"
+                android:paddingStart="@dimen/small_margin"
+                android:shadowColor="@color/colorAccent"
+                android:shadowDx="4"
+                android:shadowDy="4"
+                android:shadowRadius="1.0"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="48sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSearchGames"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="@dimen/small_margin"
+                android:elevation="@dimen/medium_margin"
+                android:maxLines="1"
+                android:inputType="text"
+                style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                android:gravity="center_vertical"
+                android:hint="@string/default_key"
+                android:imeOptions="actionSearch"
+                app:layout_constraintEnd_toStartOf="@id/btGo"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btGo"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_button"
+                android:text="GO!"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/etSearchGames"
+                app:layout_constraintTop_toTopOf="@id/etSearchGames" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvGamesList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:game_items="@{viewmodel.itemsNFTs}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:background="@color/colorBlack"
+            android:clipToPadding="false"
+            android:paddingTop="120dp"
+            android:paddingBottom="@dimen/medium_margin"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etSearchGames"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread"
+            app:nft_items="@{viewmodel.itemsNFTs}"
             tools:listitem="@layout/item_game" />
 
 
@@ -83,19 +109,20 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/noGamesIcon"
+                android:id="@+id/noNFTsIcon"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:layout_gravity="center"
                 android:src="@drawable/opened_white_box" />
 
             <TextView
-                android:id="@+id/noTasksMain"
+                android:id="@+id/noNFTsMain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textColor="@color/colorWhite"
                 android:layout_marginBottom="@dimen/medium_padding"
-                android:text="@string/empty_game_list_message" />
+                android:text="@{viewmodel.emptyMessage}" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
